@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="XtartManager" database="MySql" id="234ade2c-b0a9-458f-9364-21e5830f2eb2" >
+	<schema name="xtartmanager" >
+		<table name="arbitros" prior="tbl" spec="" >
+			<column name="id_arbitro" type="INT" mandatory="y" />
+			<column name="nombre" type="VARCHAR" length="50" mandatory="y" />
+			<column name="tipo" type="ENUM" mandatory="y" >
+				<enumeration><![CDATA[principal,asistente,var]]></enumeration>
+			</column>
+			<column name="nacionalidad" type="VARCHAR" length="50" mandatory="y" />
+			<column name="fecha_nacimiento" type="DATE" mandatory="y" />
+			<column name="supervisa" type="INT" mandatory="y" />
+			<index name="pk_tbl" unique="PRIMARY_KEY" >
+				<column name="id_arbitro" />
+			</index>
+			<fk name="fk_arbitros" to_schema="xtartmanager" to_table="arbitros" >
+				<fk_column name="supervisa" pk="id_arbitro" />
+			</fk>
+		</table>
+		<table name="codigopostal_ciudad" prior="codigopostal_ciuda" >
+			<column name="codigo_postal" type="INT" mandatory="y" />
+			<column name="ciudad" type="VARCHAR" length="50" />
+			<index name="pk_codigopostal_ciudad" unique="PRIMARY_KEY" >
+				<column name="codigo_postal" />
+			</index>
+			<fk name="fk_codigopostal_ciudad" to_schema="xtartmanager" to_table="estadios" >
+				<fk_column name="codigo_postal" pk="codigo_postal" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="entrenadores" prior="entrenadore" >
+			<column name="id_entrenador" type="INT" mandatory="y" />
+			<column name="nombre" type="VARCHAR" length="50" mandatory="y" />
+			<column name="apellidos" type="VARCHAR" length="80" mandatory="y" />
+			<column name="fecha_nacimiento" type="DATE" mandatory="y" />
+			<column name="años_experiencia" type="INT" mandatory="y" />
+			<index name="pk_entrenadores" unique="PRIMARY_KEY" >
+				<column name="id_entrenador" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="entrenadores_equipos" prior="entrenadores_equipo" >
+			<column name="id_equipo" type="INT" mandatory="y" />
+			<column name="id_entrenador" type="INT" mandatory="y" />
+			<column name="temporada" type="VARCHAR" length="50" mandatory="y" />
+			<column name="fecha_inicio" type="DATE" mandatory="y" />
+			<column name="fecha_fin" type="DATE" mandatory="y" />
+			<index name="pk_entrenadores_equipos" unique="PRIMARY_KEY" >
+				<column name="id_equipo" />
+				<column name="id_entrenador" />
+			</index>
+			<fk name="fk_entrenadores_equipos" to_schema="xtartmanager" to_table="equipos" >
+				<fk_column name="id_equipo" pk="id_equipos" />
+			</fk>
+			<fk name="fk_entrenadores_equipos" to_schema="xtartmanager" to_table="entrenadores" >
+				<fk_column name="id_entrenador" pk="id_entrenador" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="equipos" prior="equip" >
+			<column name="id_equipos" type="INT" mandatory="y" />
+			<column name="nombre" type="VARCHAR" length="50" mandatory="y" />
+			<column name="ciudad" type="VARCHAR" length="50" mandatory="y" />
+			<column name="codigo_postal" type="INT" mandatory="y" />
+			<column name="año_fundacion" type="DATE" mandatory="y" />
+			<column name="id_estadio" type="INT" />
+			<index name="pk_equipos" unique="PRIMARY_KEY" >
+				<column name="id_equipos" />
+			</index>
+			<fk name="fk_equipos_estadios" to_schema="xtartmanager" to_table="codigopostal_ciudad" >
+				<fk_column name="codigo_postal" pk="codigo_postal" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="estadios" prior="estadio" >
+			<column name="id_estadio" type="INT" mandatory="y" />
+			<column name="nombre" type="VARCHAR" length="50" mandatory="y" />
+			<column name="capacidad" type="INT" mandatory="y" />
+			<column name="direccion" type="VARCHAR" length="100" mandatory="y" />
+			<column name="ciudad" type="VARCHAR" length="50" mandatory="y" />
+			<column name="codigo_postal" type="INT" />
+			<column name="año_inauguracion" type="DATE" mandatory="y" />
+			<column name="tipo_cesped" type="ENUM" mandatory="y" >
+				<enumeration><![CDATA[natural,artificial]]></enumeration>
+			</column>
+			<index name="pk_estadios" unique="PRIMARY_KEY" >
+				<column name="id_estadio" />
+			</index>
+			<index name="unq_estadios_codigo_postal" unique="UNIQUE_KEY" >
+				<column name="codigo_postal" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="jornadas" prior="jornada" >
+			<column name="id_jornada" type="INT" mandatory="y" />
+			<column name="fecha_inicio" type="DATE" mandatory="y" />
+			<column name="fecha_final" type="DATE" mandatory="y" />
+			<column name="numero_jornada" type="INT" mandatory="y" />
+			<column name="estado" type="ENUM" mandatory="y" >
+				<enumeration><![CDATA[pendiente,iniciada,finalizada]]></enumeration>
+			</column>
+			<column name="id_liga" type="INT" />
+			<index name="pk_jornadas" unique="PRIMARY_KEY" >
+				<column name="id_jornada" />
+			</index>
+			<fk name="fk_jornadas_ligas" to_schema="xtartmanager" to_table="ligas" >
+				<fk_column name="id_liga" pk="id_liga" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="jugadas_partidos" prior="jugadas_part" >
+			<column name="id_estadistica" type="INT" mandatory="y" />
+			<column name="tarjetas_amarillas" type="INT" />
+			<column name="tarjetas_rojas" type="INT" />
+			<column name="id_posicion_jugada" type="INT" />
+			<column name="asistencias" type="INT" />
+			<column name="faltas" type="INT" />
+			<column name="goles" type="INT" />
+			<column name="dni_jugador" type="INT" />
+			<index name="pk_jugadas_partidos" unique="PRIMARY_KEY" >
+				<column name="id_estadistica" />
+			</index>
+			<index name="unq_jugadas_partidos_id_posicion_jugada" unique="UNIQUE_KEY" >
+				<column name="id_posicion_jugada" />
+			</index>
+			<fk name="fk_jugadas_partidos_jugadores" to_schema="xtartmanager" to_table="jugadores" >
+				<fk_column name="dni_jugador" pk="dni" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="jugadores" prior="jugador" >
+			<column name="dni" type="CHAR" length="9" mandatory="y" />
+			<column name="fecha_nacimiento" type="DATE" mandatory="y" />
+			<column name="dorsal" type="INT" mandatory="y" />
+			<column name="nombre" type="VARCHAR" length="50" mandatory="y" />
+			<column name="apellidos" type="VARCHAR" length="80" mandatory="y" />
+			<column name="id_posicion_jugada" type="INT" mandatory="y" />
+			<column name="altura" type="DOUBLE" mandatory="y" />
+			<column name="id_equipo" type="INT" />
+			<index name="pk_jugadores" unique="PRIMARY_KEY" >
+				<column name="dni" />
+			</index>
+			<fk name="fk_jugadores_posicion_jugada" to_schema="xtartmanager" to_table="posicion_jugada" >
+				<fk_column name="id_posicion_jugada" pk="id_posicion_jugada" />
+			</fk>
+			<fk name="fk_jugadores_equipos" to_schema="xtartmanager" to_table="equipos" >
+				<fk_column name="id_equipo" pk="id_equipos" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="ligas" prior="lig" >
+			<column name="id_liga" type="INT" mandatory="y" />
+			<column name="nombre" type="VARCHAR" length="50" mandatory="y" />
+			<column name="temporada" type="VARCHAR" length="50" mandatory="y" />
+			<column name="numero_equipos" type="INT" mandatory="y" />
+			<column name="fecha_inicio" type="DATE" mandatory="y" />
+			<column name="fecha_final" type="DATE" mandatory="y" />
+			<index name="pk_ligas" unique="PRIMARY_KEY" >
+				<column name="id_liga" />
+			</index>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="partidos" prior="partid" >
+			<column name="goles_locales" type="INT" />
+			<column name="goles_visitantes" type="INT" />
+			<column name="hora" type="TIME" mandatory="y" />
+			<column name="fecha" type="DATE" mandatory="y" />
+			<column name="numero_partido" type="INT" mandatory="y" />
+			<column name="id_jornada" type="INT" mandatory="y" />
+			<column name="id_estadio" type="INT" />
+			<column name="id_equipo" type="INT" />
+			<index name="pk_partidos" unique="PRIMARY_KEY" >
+				<column name="numero_partido" />
+				<column name="id_jornada" />
+			</index>
+			<index name="unq_partidos_numero_partido" unique="UNIQUE_KEY" >
+				<column name="numero_partido" />
+			</index>
+			<fk name="fk_partidos_equipos" to_schema="xtartmanager" to_table="equipos" >
+				<fk_column name="id_equipo" pk="id_equipos" />
+			</fk>
+			<fk name="fk_partidos_estadios" to_schema="xtartmanager" to_table="estadios" >
+				<fk_column name="id_estadio" pk="id_estadio" />
+			</fk>
+			<fk name="fk_partidos_jornadas" to_schema="xtartmanager" to_table="jornadas" >
+				<fk_column name="id_jornada" pk="id_jornada" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="partidos_arbitros" prior="partidos_arbitro" >
+			<column name="id_arbitros_partidos" type="INT" mandatory="y" />
+			<column name="id_arbitro" type="INT" />
+			<column name="numero_partido" type="INT" />
+			<column name="id_jornada" type="INT" />
+			<index name="pk_partidos_arbitros" unique="PRIMARY_KEY" >
+				<column name="id_arbitros_partidos" />
+			</index>
+			<fk name="fk_partidos_arbitros_arbitros" to_schema="xtartmanager" to_table="arbitros" >
+				<fk_column name="id_arbitro" pk="id_arbitro" />
+			</fk>
+			<fk name="fk_partidos_arbitros_partidos" to_schema="xtartmanager" to_table="partidos" >
+				<fk_column name="numero_partido" pk="numero_partido" />
+			</fk>
+			<fk name="fk_partidos_arbitros_jornadas" to_schema="xtartmanager" to_table="jornadas" >
+				<fk_column name="id_jornada" pk="id_jornada" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="posicion_jugada" prior="posicion_juga" >
+			<column name="id_posicion_jugada" type="INT" mandatory="y" />
+			<column name="posicion_jugada" type="VARCHAR" length="50" />
+			<index name="pk_posicion_jugada" unique="PRIMARY_KEY" >
+				<column name="id_posicion_jugada" />
+			</index>
+			<fk name="fk_posicion_jugada" to_schema="xtartmanager" to_table="jugadas_partidos" >
+				<fk_column name="id_posicion_jugada" pk="id_posicion_jugada" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="telefono_jugador" prior="telefono_jug" >
+			<column name="dni_jugador" type="CHAR" length="9" mandatory="y" />
+			<column name="telefono" type="INT" mandatory="y" />
+			<index name="pk_telefono_jugador" unique="PRIMARY_KEY" >
+				<column name="dni_jugador" />
+				<column name="telefono" />
+			</index>
+			<fk name="fk_telefono_jugador_jugadores" to_schema="xtartmanager" to_table="jugadores" >
+				<fk_column name="dni_jugador" pk="dni" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+		<table name="tienda_fichajes" prior="tienda_ficha" >
+			<column name="id_fichaje" type="INT" mandatory="y" />
+			<column name="fecha_fichaje" type="DATE" />
+			<column name="precio" type="DOUBLE" />
+			<column name="salario" type="DOUBLE" mandatory="y" />
+			<column name="estado" type="ENUM" mandatory="y" >
+				<enumeration><![CDATA[disponible,ocupado]]></enumeration>
+			</column>
+			<column name="dni_jugador" type="CHAR" length="9" />
+			<index name="pk_tienda_fichajes" unique="PRIMARY_KEY" >
+				<column name="id_fichaje" />
+			</index>
+			<fk name="fk_tienda_fichajes_jugadores" to_schema="xtartmanager" to_table="jugadores" >
+				<fk_column name="dni_jugador" pk="dni" />
+			</fk>
+			<options><![CDATA[engine=InnoDB]]></options>
+		</table>
+	</schema>
+	<diagram_group name="Default" id="4412e071-f29d-4177-8bd6-b6b05c6e1abd" >
+		<diagram name="Default Diagram" id="5d2fb466-93fc-4bd0-acf8-2b9bda6416ae" show_relation="columns" >
+			<entity schema="xtartmanager" name="arbitros" color="3986C1" x="152" y="532" />
+			<entity schema="xtartmanager" name="codigopostal_ciudad" color="C1D8EE" x="874" y="304" />
+			<entity schema="xtartmanager" name="entrenadores" color="C1D8EE" x="1254" y="57" />
+			<entity schema="xtartmanager" name="entrenadores_equipos" color="C1D8EE" x="1140" y="399" />
+			<entity schema="xtartmanager" name="equipos" color="C1D8EE" x="988" y="57" />
+			<entity schema="xtartmanager" name="estadios" color="C1D8EE" x="741" y="57" />
+			<entity schema="xtartmanager" name="jornadas" color="C1D8EE" x="494" y="285" />
+			<entity schema="xtartmanager" name="jugadas_partidos" color="C1D8EE" x="1577" y="665" />
+			<entity schema="xtartmanager" name="jugadores" color="C1D8EE" x="1311" y="665" />
+			<entity schema="xtartmanager" name="ligas" color="C1D8EE" x="114" y="285" />
+			<entity schema="xtartmanager" name="partidos" color="C1D8EE" x="703" y="551" />
+			<entity schema="xtartmanager" name="partidos_arbitros" color="C1D8EE" x="1102" y="646" />
+			<entity schema="xtartmanager" name="posicion_jugada" color="C1D8EE" x="1444" y="1007" />
+			<entity schema="xtartmanager" name="telefono_jugador" color="C1D8EE" x="1235" y="969" />
+			<entity schema="xtartmanager" name="tienda_fichajes" color="C1D8EE" x="912" y="931" />
+			<callout x="57" y="114" pointer="Round" >
+				<comment><![CDATA[- Haz clic derecho en el diagrama para crear nuevas tablas. 
+- Doble clic en las cabeceras de las tablas para editar. 
+- Obtener una mejor comprensión del esquema creando múltiples diagramas.
+- Guardar el diseño en el archivo modelo y desplegar desde 'Esquema / Crear en la base de datos'.]]></comment>
+			</callout>
+		</diagram>
+	</diagram_group>
+</project>
