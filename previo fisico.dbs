@@ -268,22 +268,22 @@
 	</schema>
 	<diagram_group name="Default" id="1494d0e8-1d10-45eb-9be2-2ac85d49fbd7" >
 		<diagram name="Default Diagram" id="5d2fb466-93fc-4bd0-acf8-2b9bda6416ae" show_relation="columns" >
-			<entity schema="xtartmanager" name="arbitros" color="3986C1" x="152" y="532" />
-			<entity schema="xtartmanager" name="codigopostal_ciudad" color="C1D8EE" x="874" y="304" />
-			<entity schema="xtartmanager" name="entrenadores" color="C1D8EE" x="1254" y="57" />
-			<entity schema="xtartmanager" name="entrenadores_equipos" color="C1D8EE" x="1140" y="399" />
-			<entity schema="xtartmanager" name="equipos" color="C1D8EE" x="988" y="57" />
-			<entity schema="xtartmanager" name="estadios" color="C1D8EE" x="741" y="57" />
-			<entity schema="xtartmanager" name="jornadas" color="C1D8EE" x="494" y="285" />
-			<entity schema="xtartmanager" name="jugadas_partidos" color="C1D8EE" x="1577" y="665" />
-			<entity schema="xtartmanager" name="jugadores" color="C1D8EE" x="1311" y="665" />
-			<entity schema="xtartmanager" name="ligas" color="C1D8EE" x="114" y="285" />
-			<entity schema="xtartmanager" name="partidos" color="C1D8EE" x="703" y="589" />
-			<entity schema="xtartmanager" name="partidos_arbitros" color="C1D8EE" x="1102" y="646" />
-			<entity schema="xtartmanager" name="posiciones" color="C1D8EE" x="1444" y="1007" />
-			<entity schema="xtartmanager" name="telefono_jugador" color="C1D8EE" x="1235" y="969" />
-			<entity schema="xtartmanager" name="tienda_fichajes" color="C1D8EE" x="912" y="931" />
-			<callout x="57" y="114" pointer="Round" >
+			<entity schema="xtartmanager" name="arbitros" color="3986C1" x="209" y="532" />
+			<entity schema="xtartmanager" name="codigopostal_ciudad" color="C1D8EE" x="931" y="304" />
+			<entity schema="xtartmanager" name="entrenadores" color="C1D8EE" x="1311" y="57" />
+			<entity schema="xtartmanager" name="entrenadores_equipos" color="C1D8EE" x="1197" y="399" />
+			<entity schema="xtartmanager" name="equipos" color="C1D8EE" x="1045" y="57" />
+			<entity schema="xtartmanager" name="estadios" color="C1D8EE" x="798" y="57" />
+			<entity schema="xtartmanager" name="jornadas" color="C1D8EE" x="551" y="285" />
+			<entity schema="xtartmanager" name="jugadas_partidos" color="C1D8EE" x="1634" y="665" />
+			<entity schema="xtartmanager" name="jugadores" color="C1D8EE" x="1368" y="665" />
+			<entity schema="xtartmanager" name="ligas" color="C1D8EE" x="171" y="285" />
+			<entity schema="xtartmanager" name="partidos" color="C1D8EE" x="760" y="589" />
+			<entity schema="xtartmanager" name="partidos_arbitros" color="C1D8EE" x="1159" y="646" />
+			<entity schema="xtartmanager" name="posiciones" color="C1D8EE" x="1501" y="1007" />
+			<entity schema="xtartmanager" name="telefono_jugador" color="C1D8EE" x="1292" y="969" />
+			<entity schema="xtartmanager" name="tienda_fichajes" color="C1D8EE" x="969" y="931" />
+			<callout x="57" y="57" pointer="Round" >
 				<comment><![CDATA[- Haz clic derecho en el diagrama para crear nuevas tablas. 
 - Doble clic en las cabeceras de las tablas para editar. 
 - Obtener una mejor comprensión del esquema creando múltiples diagramas.

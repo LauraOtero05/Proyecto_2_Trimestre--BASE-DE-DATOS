@@ -82,7 +82,7 @@
 			<column name="direccion" type="VARCHAR" length="100" mandatory="y" />
 			<column name="ciudad" type="VARCHAR" length="50" mandatory="y" />
 			<column name="codigo_postal" type="INT" />
-			<column name="año_inauguracion" type="DATE" mandatory="y" />
+			<column name="año_inauguracion" type="YEAR" length="10" mandatory="y" />
 			<column name="tipo_cesped" type="ENUM" mandatory="y" >
 				<enumeration><![CDATA[natural,artificial]]></enumeration>
 			</column>
@@ -151,7 +151,7 @@
 			<index name="pk_jugadores" unique="PRIMARY_KEY" >
 				<column name="dni" />
 			</index>
-			<fk name="fk_jugadores_posicion_jugada" to_schema="xtartmanager" to_table="posicion_jugada" >
+			<fk name="fk_jugadores_posicion_jugada" to_schema="xtartmanager" to_table="posiciones" >
 				<fk_column name="id_posicion_jugada" pk="id_posicion_jugada" />
 			</fk>
 			<fk name="fk_jugadores_equipos" to_schema="xtartmanager" to_table="equipos" >
@@ -179,7 +179,9 @@
 			<column name="numero_partido" type="INT" mandatory="y" />
 			<column name="id_jornada" type="INT" mandatory="y" />
 			<column name="id_estadio" type="INT" />
-			<column name="id_equipo" type="INT" />
+			<column name="id_equipo_local" prior="id_equipo" type="INT" />
+			<column name="id_equipo_visitante" type="INT" />
+			<column name="id_equipo_ganador" type="INT" />
 			<index name="pk_partidos" unique="PRIMARY_KEY" >
 				<column name="numero_partido" />
 				<column name="id_jornada" />
@@ -188,13 +190,19 @@
 				<column name="numero_partido" />
 			</index>
 			<fk name="fk_partidos_equipos" to_schema="xtartmanager" to_table="equipos" >
-				<fk_column name="id_equipo" pk="id_equipos" />
+				<fk_column name="id_equipo_local" pk="id_equipos" />
 			</fk>
 			<fk name="fk_partidos_estadios" to_schema="xtartmanager" to_table="estadios" >
 				<fk_column name="id_estadio" pk="id_estadio" />
 			</fk>
 			<fk name="fk_partidos_jornadas" to_schema="xtartmanager" to_table="jornadas" >
 				<fk_column name="id_jornada" pk="id_jornada" />
+			</fk>
+			<fk name="fk_partidos_equipos" to_schema="xtartmanager" to_table="equipos" >
+				<fk_column name="id_equipo_visitante" pk="id_equipos" />
+			</fk>
+			<fk name="fk_partidos_equipos" to_schema="xtartmanager" to_table="equipos" >
+				<fk_column name="id_equipo_ganador" pk="id_equipos" />
 			</fk>
 			<options><![CDATA[engine=InnoDB]]></options>
 		</table>
@@ -217,7 +225,7 @@
 			</fk>
 			<options><![CDATA[engine=InnoDB]]></options>
 		</table>
-		<table name="posicion_jugada" prior="posicion_juga" >
+		<table name="posiciones" prior="posicion_jugada" >
 			<column name="id_posicion_jugada" type="INT" mandatory="y" />
 			<column name="posicion_jugada" type="VARCHAR" length="50" mandatory="y" />
 			<index name="pk_posicion_jugada" unique="PRIMARY_KEY" >
@@ -258,7 +266,7 @@
 			<options><![CDATA[engine=InnoDB]]></options>
 		</table>
 	</schema>
-	<diagram_group name="Default" id="c7b4be99-bb37-42cf-afa5-d70c8a49cde8" >
+	<diagram_group name="Default" id="1494d0e8-1d10-45eb-9be2-2ac85d49fbd7" >
 		<diagram name="Default Diagram" id="5d2fb466-93fc-4bd0-acf8-2b9bda6416ae" show_relation="columns" >
 			<entity schema="xtartmanager" name="arbitros" color="3986C1" x="152" y="532" />
 			<entity schema="xtartmanager" name="codigopostal_ciudad" color="C1D8EE" x="874" y="304" />
@@ -270,9 +278,9 @@
 			<entity schema="xtartmanager" name="jugadas_partidos" color="C1D8EE" x="1577" y="665" />
 			<entity schema="xtartmanager" name="jugadores" color="C1D8EE" x="1311" y="665" />
 			<entity schema="xtartmanager" name="ligas" color="C1D8EE" x="114" y="285" />
-			<entity schema="xtartmanager" name="partidos" color="C1D8EE" x="703" y="551" />
+			<entity schema="xtartmanager" name="partidos" color="C1D8EE" x="703" y="589" />
 			<entity schema="xtartmanager" name="partidos_arbitros" color="C1D8EE" x="1102" y="646" />
-			<entity schema="xtartmanager" name="posicion_jugada" color="C1D8EE" x="1444" y="1007" />
+			<entity schema="xtartmanager" name="posiciones" color="C1D8EE" x="1444" y="1007" />
 			<entity schema="xtartmanager" name="telefono_jugador" color="C1D8EE" x="1235" y="969" />
 			<entity schema="xtartmanager" name="tienda_fichajes" color="C1D8EE" x="912" y="931" />
 			<callout x="57" y="114" pointer="Round" >
