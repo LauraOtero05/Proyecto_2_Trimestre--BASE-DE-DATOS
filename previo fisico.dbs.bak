@@ -19,7 +19,7 @@
 		</table>
 		<table name="codigopostal_ciudad" prior="codigopostal_ciuda" >
 			<column name="codigo_postal" type="INT" mandatory="y" />
-			<column name="ciudad" type="VARCHAR" length="50" />
+			<column name="ciudad" type="VARCHAR" length="50" mandatory="y" />
 			<index name="pk_codigopostal_ciudad" unique="PRIMARY_KEY" >
 				<column name="codigo_postal" />
 			</index>
@@ -70,6 +70,9 @@
 			<fk name="fk_equipos_estadios" to_schema="xtartmanager" to_table="codigopostal_ciudad" >
 				<fk_column name="codigo_postal" pk="codigo_postal" />
 			</fk>
+			<fk name="fk_equipos_estadios" to_schema="xtartmanager" to_table="estadios" >
+				<fk_column name="id_estadio" pk="id_estadio" />
+			</fk>
 			<options><![CDATA[engine=InnoDB]]></options>
 		</table>
 		<table name="estadios" prior="estadio" >
@@ -117,6 +120,8 @@
 			<column name="faltas" type="INT" />
 			<column name="goles" type="INT" />
 			<column name="dni_jugador" type="INT" />
+			<column name="num_partido" type="INT" />
+			<column name="id_jornada" type="INT" />
 			<index name="pk_jugadas_partidos" unique="PRIMARY_KEY" >
 				<column name="id_estadistica" />
 			</index>
@@ -125,6 +130,12 @@
 			</index>
 			<fk name="fk_jugadas_partidos_jugadores" to_schema="xtartmanager" to_table="jugadores" >
 				<fk_column name="dni_jugador" pk="dni" />
+			</fk>
+			<fk name="fk_jugadas_partidos_jornadas" to_schema="xtartmanager" to_table="jornadas" >
+				<fk_column name="id_jornada" pk="id_jornada" />
+			</fk>
+			<fk name="fk_jugadas_partidos_partidos" to_schema="xtartmanager" to_table="partidos" >
+				<fk_column name="num_partido" pk="numero_partido" />
 			</fk>
 			<options><![CDATA[engine=InnoDB]]></options>
 		</table>
@@ -208,7 +219,7 @@
 		</table>
 		<table name="posicion_jugada" prior="posicion_juga" >
 			<column name="id_posicion_jugada" type="INT" mandatory="y" />
-			<column name="posicion_jugada" type="VARCHAR" length="50" />
+			<column name="posicion_jugada" type="VARCHAR" length="50" mandatory="y" />
 			<index name="pk_posicion_jugada" unique="PRIMARY_KEY" >
 				<column name="id_posicion_jugada" />
 			</index>
@@ -247,7 +258,7 @@
 			<options><![CDATA[engine=InnoDB]]></options>
 		</table>
 	</schema>
-	<diagram_group name="Default" id="4412e071-f29d-4177-8bd6-b6b05c6e1abd" >
+	<diagram_group name="Default" id="c7b4be99-bb37-42cf-afa5-d70c8a49cde8" >
 		<diagram name="Default Diagram" id="5d2fb466-93fc-4bd0-acf8-2b9bda6416ae" show_relation="columns" >
 			<entity schema="xtartmanager" name="arbitros" color="3986C1" x="152" y="532" />
 			<entity schema="xtartmanager" name="codigopostal_ciudad" color="C1D8EE" x="874" y="304" />
