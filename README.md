@@ -60,7 +60,7 @@ El proyecto está organizado en las siguientes carpetas:
 
     - **DML** (inserción de datos)
 
-    - **Script** corrigiendo errores para el uso de todas las palabras reservadas de los anteriores sublenguajes de SQL (DDL y DML). 
+    - **Script** que demuestra la correcta aplicación de las restricciones definidas y la forma en la que el sistema impide operaciones que romperían la integridad del esquema. 
 
 
 ## Tecnologías utilizadas
