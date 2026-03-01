@@ -1,4 +1,4 @@
-# Base de Datos - Proyecto Pokémon
+# Base de Datos - Xtart Manager
 
 ## Descripción
 Este repositorio contiene la base de datos del proyecto académico **Xtart Manager**, un gestor de **ligas de fútbol**. La base de datos está compuesta por 15 tablas:
@@ -60,7 +60,7 @@ El proyecto está organizado en las siguientes carpetas:
 
     - **DML** (inserción de datos)
 
-    - **Script** corrigiendo errores para el uso de todas las palabras reservadas de los anteriores sublenguajes de SQL (DDL yDML). 
+    - **Script** corrigiendo errores para el uso de todas las palabras reservadas de los anteriores sublenguajes de SQL (DDL y DML). 
 
 
 ## Tecnologías utilizadas
@@ -81,6 +81,58 @@ El proyecto está organizado en las siguientes carpetas:
     - DBeaver
 - **Acceso a Git** para clonar el repositorio.  
 - **Sistema operativo compatible**: Windows, macOS o Linux.  
+
+## Despliegue de la base de datos
+
+Para implementar la base de datos **Xtart Manager** en MySQL, seguir los siguientes pasos:
+
+1. **Clonar el repositorio:**
+
+```bash
+    git clone https://github.com/LauraOtero05/Proyecto_2_Trimestre--BASE-DE-DATOS.git
+```
+2. **Acceder a la carpeta del proyecto:**
+```bash
+    cd Proyecto_2_Trimestre--BASE-DE-DATOS
+```
+3. **Abrir el cliente de MySQL:**
+
+Conectarse al servidor MySQL desde:
+- MySQL Workbench
+- DBeaver
+- Consola MySQL
+
+## Ejecución en MySQL / DBeaver
+
+1. **Asegurar que MySQL esté en ejecución**
+
+Verificar que el servidor MySQL esté activo antes de comenzar.
+
+2. **Crear conexión en DBeaver (opcional)**
+
+    1. Abrir DBeaver
+    2. Crear nueva conexión → MySQL
+    3. Configurar: 
+        - Host:  `localhost`
+        - Puerto: `3306`
+        - Usuario: `root` (o el usuario que corresponda)
+        - Contraseña correspondiente
+
+3. **Ejecutar scripts en el orden correcto**
+
+El orden de ejecución es fundamental:
+1. `Creacion_DDL_XtartManager.sql`
+2. `Creacion_DML_XtartManager.sql`
+
+4. **Verificación**
+
+```bash
+USE xtart_manager;
+SHOW TABLES;
+SELECT COUNT(*) FROM equipos;
+```
+Si los datos aparecen correctamente, la base de datos está lista.
+
 
 
 
