@@ -34,9 +34,7 @@ El proyecto está organizado en las siguientes carpetas:
     xtart_manager/
     │
     ├── MODELOS DRAW IO/
-    │   ├── MODELO Xtart Manager.drawio
-    │   ├── MODELO LOGICO Xtart Manager.drawio
-    │   └── NORMALIZACION Xtart Manager.drawio
+    │   └── MODELOS Xtart Manager.drawio
     │
     ├── MODELO FISICO/
     │   ├── modelo fisico.dbs
