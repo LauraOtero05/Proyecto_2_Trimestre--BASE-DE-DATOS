@@ -152,7 +152,7 @@ CREATE TABLE jugadas_partidos (
   id_jornada         INT NOT NULL
 );
 
--- ALTER FOREIGNS KEYS
+-- ALTER FOREIGNS KEYS -- Asignamos todas las claves foraneas de todas las tablas
 
 -- (1) jornadas -> ligas
 ALTER TABLE jornadas
@@ -287,7 +287,7 @@ ALTER TABLE jugadores
 
 
 
--- 4) RENAME 
+-- 4) RENAME -- Renombramos la tabla tienda_fichajes
 RENAME TABLE tienda_fichajes TO fichajes;
 
 

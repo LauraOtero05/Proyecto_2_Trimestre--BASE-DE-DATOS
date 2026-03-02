@@ -15,6 +15,7 @@
     Provoca: Failed to open the referenced table...
     Justifica que la tabla referenciada debe existir.
  ------------------------------------------------------------ */
+    
   ALTER TABLE equipos
   ADD CONSTRAINT fk_equipos_tabla_inexistente
   FOREIGN KEY (id_estadio) REFERENCES estadio_inexistente(id_estadio);

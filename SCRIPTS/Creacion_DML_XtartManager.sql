@@ -1,7 +1,7 @@
 
 USE xtart_manager;
 
--- INSERT
+-- INSERT -- Insertamos los datos de todas las tablas
 
 INSERT INTO codigopostal_ciudad (codigo_postal, ciudad) VALUES
 (28001,'Madrid'),
@@ -194,7 +194,7 @@ INSERT INTO jugadas_partidos (id_estadistica, tarjetas_amarillas, tarjetas_rojas
 (10,0,0,1,0,0,0,'12345678A',1,3);
 
 
--- TRUNCATE
+-- TRUNCATE -- Desactivamos y activamos la comprobacion de las claves foraneas para borrar la tabla
 
 SET FOREIGN_KEY_CHECKS = 0;
 
@@ -215,7 +215,7 @@ INSERT INTO fichajes (id_fichaje, fecha_fichaje, precio, salario, estado, dni_ju
 (9,'2025-07-13',1000000.00,600000.00,'cerrado','90123456J'),
 (10,'2025-07-14',2200000.00,800000.00,'cerrado','01234567K');
 
--- UPDATE 
+-- UPDATE -- Actualizamos los datos de las tablas
 UPDATE jornadas
 SET estado = 'finalizada'
 WHERE id_jornada = 4;
@@ -225,7 +225,7 @@ SET capacidad = capacidad + 1000
 WHERE id_estadio = 6;
 
 
--- DELETE 
+-- DELETE -- Borramos los dos registros
 DELETE FROM telefono_jugador
 WHERE dni_jugador = '12345678A' AND telefono = '600000001';
 
